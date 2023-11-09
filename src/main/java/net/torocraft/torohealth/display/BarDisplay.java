@@ -13,9 +13,9 @@ import net.minecraft.world.entity.LivingEntity;
 import net.torocraft.torohealth.bars.HealthBarRenderer;
 
 public class BarDisplay {
+  private static final ResourceLocation ARMOR_TEXTURE = new ResourceLocation("hud/armor_full");
+  private static final ResourceLocation HEART_TEXTURE = new ResourceLocation("hud/heart/full");
 
-  private static final ResourceLocation ICON_TEXTURES =
-      new ResourceLocation("textures/gui/icons.png");
   private final Minecraft mc;
   private final Screen gui;
 
@@ -33,7 +33,6 @@ public class BarDisplay {
 
     RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
     RenderSystem.setShader(GameRenderer::getPositionTexShader);
-    RenderSystem.setShaderTexture(0, ICON_TEXTURES);
     RenderSystem.enableBlend();
 
     HealthBarRenderer.render(guiGraphics.pose(), entity, guiGraphics.bufferSource(), 63, 14, 130, false);
@@ -64,10 +63,10 @@ public class BarDisplay {
   }
 
   private void renderArmorIcon(GuiGraphics matrix, int x, int y) {
-    matrix.blit(ICON_TEXTURES, x, y, 34, 9, 9, 9);
+    matrix.blitSprite(ARMOR_TEXTURE, x, y, 9, 9);
   }
 
   private void renderHeartIcon(GuiGraphics matrix, int x, int y) {
-    matrix.blit(ICON_TEXTURES, x, y, 16 + 36, 0, 9, 9);
+    matrix.blitSprite(HEART_TEXTURE, x, y, 9, 9);
   }
 }
